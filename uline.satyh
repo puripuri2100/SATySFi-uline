@@ -1,5 +1,15 @@
 @require: gr
 
+module Uline : sig
+
+  direct \uline : [inline-text] inline-cmd
+  direct \uuline : [inline-text] inline-cmd
+  direct \sout : [inline-text] inline-cmd
+  direct \dashuline : [inline-text] inline-cmd
+  direct \dotuline : [inline-text] inline-cmd
+
+end = struct
+
 % length -> color -> deco-set
 let make-uline t color =
   let strokef = stroke t color in
@@ -184,3 +194,5 @@ let-inline ctx \dotuline it =
   let deco-set = make-dotuline t color in
   let pads = (0pt, 0pt, 0pt, 0pt) in
     inline-frame-breakable pads deco-set ib
+
+end
