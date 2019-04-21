@@ -1,0 +1,7 @@
+*.aux
+*.log
+*.dvi
+*.pdf
+*.satysfi-aux
+
+tests/
