@@ -1,0 +1,186 @@
+@require: gr
+
+% length -> color -> deco-set
+let make-uline t color =
+  let strokef = stroke t color in
+  let space = t +' 1.0pt in
+  let decoS (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoH (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoM (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoT (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+    (decoS, decoH, decoM, decoT)
+
+
+% length -> color -> deco-set
+let make-uuline t color =
+  let strokef = stroke t color in
+  let space = t +' 1.0pt in
+  let decoS (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d) (x +' w, y -' d));
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoH (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d) (x +' w, y -' d));
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoM (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d) (x +' w, y -' d));
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoT (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d) (x +' w, y -' d));
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+    (decoS, decoH, decoM, decoT)
+
+
+% length -> color -> deco-set
+let make-sout t color =
+  let strokef = stroke t color in
+  let decoS (x, y) w h d =
+    [
+      strokef (Gr.line (x, y +' h *' 0.5) (x +' w, y +' h *' 0.5))
+    ]
+  in
+  let decoH (x, y) w h d =
+    [
+      strokef (Gr.line (x, y +' h *' 0.5) (x +' w, y +' h *' 0.5))
+    ]
+  in
+  let decoM (x, y) w h d =
+    [
+      strokef (Gr.line (x, y +' h *' 0.5) (x +' w, y +' h *' 0.5))
+    ]
+  in
+  let decoT (x, y) w h d =
+    [
+      strokef (Gr.line (x, y +' h *' 0.5) (x +' w, y +' h *' 0.5))
+    ]
+  in
+    (decoS, decoH, decoM, decoT)
+
+
+% length -> color -> deco-set
+let make-dashuline t color =
+  let dash = (3pt, 2pt, 0pt) in % 横の長さ, 線と線の間, 最初の余白
+  let strokef = dashed-stroke t dash color in
+  let space = t +' 1.0pt in
+  let decoS (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoH (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoM (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoT (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+    (decoS, decoH, decoM, decoT)
+
+
+% length -> color -> deco-set
+let make-dotuline t color =
+  let dash = (t, t *' 3.0, 0pt) in % 横の長さ, 線と線の間, 最初の余白
+  let strokef = dashed-stroke t dash color in
+  let space = t +' 1.0pt in
+  let decoS (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoH (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoM (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+  let decoT (x, y) w h d =
+    [
+      strokef (Gr.line (x, y -' d -' space) (x +' w, y -' d -' space))
+    ]
+  in
+    (decoS, decoH, decoM, decoT)
+
+
+
+let-inline ctx \uline it =
+  let color = get-text-color ctx in
+  let t = 0.5pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-uline t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
+
+
+let-inline ctx \uuline it =
+  let color = get-text-color ctx in
+  let t = 0.5pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-uuline t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
+
+
+let-inline ctx \sout it =
+  let color = get-text-color ctx in
+  let t = 0.5pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-sout t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
+
+
+let-inline ctx \dashuline it =
+  let color = get-text-color ctx in
+  let t = 0.5pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-dashuline t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
+
+
+let-inline ctx \dotuline it =
+  let color = get-text-color ctx in
+  let t = 1pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-dotuline t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
