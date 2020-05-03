@@ -193,7 +193,7 @@ let-inline ctx \uwave ?:color-opt it =
     | None -> get-text-color ctx
     | Some(c) -> c
   in
-  let t = 1pt in
+  let t = 0.8pt in
   let ib = read-inline ctx it in
   let deco-set = make-uwave t color in
   let pads = (0pt, 0pt, 0pt, 0pt) in
