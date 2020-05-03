@@ -6,7 +6,7 @@
 
 - `\uline`：単純な下線
 - `\uuline`：2重下線
-- `\sout`：打ち消し線
+- `\midline`：打ち消し線
 - `\dashuline`：ダッシュの下線
 - `\dotuline`：点線
 - `\uwave`：波線
@@ -19,7 +19,7 @@
 
 - `make-uline`：単純な下線
 - `make-uuline`：2重下線
-- `make-sout`：打ち消し線
+- `make-midline`：打ち消し線
 - `make-dashuline`：ダッシュの下線
 - `make-dotuline`：点線
 - `make-uwave`：波線

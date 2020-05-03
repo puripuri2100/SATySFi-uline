@@ -5,17 +5,19 @@ module Uline : sig
 
   val make-uline     : length -> color -> deco-set
   val make-uuline    : length -> color -> deco-set
-  val make-sout      : length -> color -> deco-set
+  val make-midline      : length -> color -> deco-set
   val make-dashuline : length -> color -> deco-set
   val make-dotuline  : length -> color -> deco-set
   val make-uwave     : length -> color -> deco-set
+  val make-midwave     : length -> color -> deco-set
 
   direct \uline     : [color?; inline-text] inline-cmd
   direct \uuline    : [color?; inline-text] inline-cmd
-  direct \sout      : [color?; inline-text] inline-cmd
+  direct \midline      : [color?; inline-text] inline-cmd
   direct \dashuline : [color?; inline-text] inline-cmd
   direct \dotuline  : [color?; inline-text] inline-cmd
   direct \uwave     : [color?; inline-text] inline-cmd
+  direct \midwave     : [color?; inline-text] inline-cmd
 
 end = struct
 
@@ -46,7 +48,7 @@ let make-uuline t color =
 
 
 % length -> color -> deco-set
-let make-sout t color =
+let make-midline t color =
   let strokef = stroke t color in
   let deco (x, y) w h d =
     [
@@ -120,6 +122,44 @@ let make-uwave t color =
     (deco, deco, deco, deco)
 
 
+% length -> color -> deco-set
+let make-midwave t color =
+  let curve-size = t *' 2.0 in
+  let strokef = stroke t color in
+  let space = t +' 1.0pt in
+  let-rec make-bezier-point w old-pt pre-path =
+    if w <' curve-size then
+      terminate-path pre-path
+    else
+      let (old-x, old-y) = old-pt in
+      let new-x = old-x +' curve-size in
+      let new-y =
+        if old-y >' 0pt then
+          (curve-size *' 0.5) *' (float (-1))
+        else
+          curve-size *' 0.5
+      in
+      let new-pt = (new-x, new-y) in
+      let pre-path =
+        bezier-to
+          new-pt
+          new-pt
+          (new-x +' (curve-size *' 0.5),0pt)
+          pre-path
+      in
+      make-bezier-point (w -' curve-size) new-pt pre-path
+  in
+  let deco (x, y) w h d =
+    let gr =
+      strokef (make-bezier-point w (0pt,0pt) (start-path (0pt,0pt)))
+    in
+    [
+      shift-graphics (x,y +' (h *' 0.5)) gr
+    ]
+  in
+    (deco, deco, deco, deco)
+
+
 let default-color = Color.black
 
 let-inline ctx \uline ?:color-opt it =
@@ -148,7 +188,7 @@ let-inline ctx \uuline ?:color-opt it =
     inline-frame-breakable pads deco-set ib
 
 
-let-inline ctx \sout ?:color-opt it =
+let-inline ctx \midline ?:color-opt it =
   let color =
     match color-opt with
     | None -> get-text-color ctx
@@ -156,7 +196,7 @@ let-inline ctx \sout ?:color-opt it =
   in
   let t = 0.5pt in
   let ib = read-inline ctx it in
-  let deco-set = make-sout t color in
+  let deco-set = make-midline t color in
   let pads = (0pt, 0pt, 0pt, 0pt) in
     inline-frame-breakable pads deco-set ib
 
@@ -196,6 +236,19 @@ let-inline ctx \uwave ?:color-opt it =
   let t = 0.8pt in
   let ib = read-inline ctx it in
   let deco-set = make-uwave t color in
+  let pads = (0pt, 0pt, 0pt, 0pt) in
+    inline-frame-breakable pads deco-set ib
+
+
+let-inline ctx \midwave ?:color-opt it =
+  let color =
+    match color-opt with
+    | None -> get-text-color ctx
+    | Some(c) -> c
+  in
+  let t = 0.8pt in
+  let ib = read-inline ctx it in
+  let deco-set = make-midwave t color in
   let pads = (0pt, 0pt, 0pt, 0pt) in
     inline-frame-breakable pads deco-set ib
 
