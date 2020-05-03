@@ -4,4 +4,4 @@
 *.pdf
 *.satysfi-aux
 
-tests/
+test/
