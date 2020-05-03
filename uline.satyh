@@ -10,12 +10,12 @@ module Uline : sig
   val make-dotuline  : length -> color -> deco-set
   val make-uwave     : length -> color -> deco-set
 
-  direct \uline : [color?; inline-text] inline-cmd
-  direct \uuline : [color?; inline-text] inline-cmd
-  direct \sout : [color?; inline-text] inline-cmd
+  direct \uline     : [color?; inline-text] inline-cmd
+  direct \uuline    : [color?; inline-text] inline-cmd
+  direct \sout      : [color?; inline-text] inline-cmd
   direct \dashuline : [color?; inline-text] inline-cmd
-  direct \dotuline : [color?; inline-text] inline-cmd
-  direct \uwave : [color?; inline-text] inline-cmd
+  direct \dotuline  : [color?; inline-text] inline-cmd
+  direct \uwave     : [color?; inline-text] inline-cmd
 
 end = struct
 
