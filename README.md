@@ -5,9 +5,9 @@ Underline for SAtySFi.
 ## Satyrographos
 
 ```
-opam pin add "git+https://github.com/puripuri2100/SATySFi-assert-eq.git"
+opam pin add "git+https://github.com/puripuri2100/SATySFi-uline.git"
 
-opam install satysfi-assert-eq
+opam install satysfi-uline
 
 satyrographos install
 ```
