@@ -1,0 +1,56 @@
+@require: stdjabook
+@require: code
+@require: itemize
+@require: uline/uline
+@require: lipsum/lipsum
+
+document (|
+  title = {num-conversion};
+  author = {Naoki Kaneko (a.k.a. "puripuri2100")};
+  show-title = true;
+  show-toc = false;
+|) '<
+
+  +p{下線を引くコマンドと関数を提供するパッケージです。}
+
+  +p{モジュール名は\code(`Uline`);です。}
+
++section {提供コマンド} <
+  +listing {
+    * \code(`\uline`);：単純な下線
+    * \code(`\uuline`);：2重下線
+    * \code(`\midline`);：打ち消し線
+    * \code(`\dashuline`);：ダッシュの下線
+    * \code(`\dotuline`);：点線
+    * \code(`\uwave`);：波線
+  }
+  +p{全て型は\code(`[color?; inline-text] inline-cmd`);となっている。}
+  +p{色を指定しない場合はcontextに保持されているtext-colorの値が採用されるが、色を指定すればその色で描画される。}
+>
+
++section {提供関数} <
+  +listing {
+    * \code(`make-uline`);：単純な下線
+    * \code(`make-uuline`);：2重下線
+    * \code(`make-midline`);：打ち消し線
+    * \code(`make-dashuline`);：ダッシュの下線
+    * \code(`make-dotuline`);：点線
+    * \code(`make-uwave`);：波線
+  }
+
+  +p{全て型は\code(`length -> color -> deco-set`);となっている。}
+
+  +p{第一引数は太さの情報で、第二引数は色の情報である。}
+  +p{返ってきたdeco-setoを\code(`inline-frame-breakable`);で処理してほしい。}
+>
++section {demo} <
+  +listing {
+    * uline: \uline{\quick-brown-fox;\iroha;}
+    * uuline: \uuline{\quick-brown-fox;\iroha;}
+    * midline: \midline{\quick-brown-fox;\iroha;}
+    * dashuline: \dashuline{\quick-brown-fox;\iroha;}
+    * dotuline: \dotuline{\quick-brown-fox;\iroha;}
+    * uwave: \uwave{\quick-brown-fox;\iroha;}
+  }
+>
+>

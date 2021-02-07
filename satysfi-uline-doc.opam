@@ -1,8 +1,8 @@
 opam-version: "2.0"
-name: "satysfi-uline"
+name: "satysfi-uline-doc"
 version: "0.2.1"
-synopsis: "Underline for SAtySFi"
-description: """Underline for SAtySFi"""
+synopsis: "Document: Underline for SAtySFi"
+description: """Document: Underline for SAtySFi"""
 
 maintainer: "Naoki Kaneko <puripuri2100@gmail.com>"
 authors: "Naoki Kaneko <puripuri2100@gmail.com>"
@@ -15,11 +15,18 @@ depends: [
   "satysfi" {>= "0.0.3" & < "0.0.7"}
   "satyrographos" {>= "0.0.2" & < "0.0.4"}
   "satysfi-dist"
+  "satysfi-uline" {= "%{version}%"}
+  "satysfi-lipsum" {>= "0.2.0"}
 ]
-build: [ ]
+build: [
+  ["satyrographos" "opam" "build"
+   "-name" "uline-doc"
+   "-prefix" "%{prefix}%"
+   "-script" "%{build}%/Satyristes"]
+]
 install: [
   ["satyrographos" "opam" "install"
-   "-name" "uline"
+   "-name" "uline-doc"
    "-prefix" "%{prefix}%"
    "-script" "%{build}%/Satyristes"]
 ]
