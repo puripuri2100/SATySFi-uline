@@ -3,7 +3,7 @@
 
 (library
   (name "uline")
-  (version "0.2.1")
+  (version "0.2.2")
   (sources
     (
      (package "uline.satyh" "./uline.satyh")
@@ -17,7 +17,7 @@
   ;; Library doc name
   (name "uline-doc")
   ;; Library version
-  (version "0.2.1")
+  (version "0.2.2")
   ;; Working directory to build docs
   (workingDirectory "doc")
   ;; Build commands

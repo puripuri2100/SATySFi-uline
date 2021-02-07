@@ -5,14 +5,14 @@
 @require: lipsum/lipsum
 
 document (|
-  title = {num-conversion};
+  title = {uline};
   author = {Naoki Kaneko (a.k.a. "puripuri2100")};
   show-title = true;
   show-toc = false;
 |) '<
 
   +p{下線を引くコマンドと関数を提供するパッケージです。}
-
+  +p{読み込みは\code(`@require: uline/uline`);です。}
   +p{モジュール名は\code(`Uline`);です。}
 
 +section {提供コマンド} <
